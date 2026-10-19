@@ -5,7 +5,7 @@ description: "Une collègue a mergé en premier sur le même flow et le même pe
 level: 2
 lab: 7
 lang: fr
-source_rev: "1f4e1a5e5e8192311f290f6ed5bcdb20de2af639"
+source_rev: "6e8ab3303e2da468c88faefeeb3eecca6bad577d"
 screenshots:
   - annotated/salesforce/flow-builder-assign-crew
   - annotated/salesforce/flow-builder-assign-crew-full
@@ -30,7 +30,7 @@ depends_on:
 
 **Niveau** : 2 Contributeur avancé
 
-**Durée** : ~30 min<!-- observed --> (observé : médiane 32 min, 5 participants, le plus rapide 13 min)<!-- /observed -->
+**Durée** : ~35 min<!-- observed --> (observé : médiane 37 min, 6 participants, le plus rapide 10 min)<!-- /observed -->
 
 **Vous allez** : affronter un vrai conflit de merge sur deux fichiers qui entrent en conflit de façon
 très différente, et résoudre les deux sans perdre le travail de personne.
@@ -342,7 +342,8 @@ de ce projet ne couvre.
 
 **Complete Merge** a déplacé chaque fichier de **Merge Changes** vers **Staged Changes**. Quand les
 deux y sont, la zone de message affiche déjà
-`Merge remote-tracking branch 'origin/integration'` : cliquez sur **Commit**, puis sur
+`Merge remote-tracking branch 'origin/integration' into features/US-034-crew-override`, et le
+bouton bleu en dessous affiche **Continue** tant qu'un merge est en cours : cliquez dessus, puis sur
 **Sync Changes** pour pousser.
 
 Puis **republiez** : **Save / Publish User Story**. Cela compte. Le merge a produit du XML à la main,
