@@ -5,7 +5,7 @@ description: "Transportez trois User Stories approuvées sur cinq de uat vers pr
 level: 3
 lab: 10
 lang: fr
-source_rev: "73875a7c2ed4b564cca87b9872d700f4240131c1"
+source_rev: "f8e19f65fa8c62b369e31883ac3263668123c01d"
 screenshots:
   - annotated/vscode/welcome-custom-menu-3
   - annotated/vscode/pipeline-config-danger--promotion-branches
@@ -29,7 +29,7 @@ depends_on:
 
 **Niveau** : 3 Release Manager
 
-**Durée** : ~55 min
+**Durée** : ~1 h 15<!-- observed --> (observé : médiane 1 h 16, 5 participants, le plus rapide 46 min)<!-- /observed -->
 
 **Vous allez** : livrer en preprod trois User Stories approuvées pendant que deux autres restent en
 UAT, résoudre le conflit que l'une d'elles traîne avec elle, et remettre la pipeline d'aplomb
@@ -96,7 +96,7 @@ telle qu'elle est, US-058 et US-060 comprises.
 Les deux réglages dont ce lab a besoin ont été publiés au [Lab 3.1](3-1-configure-the-pipeline-up-to-production.md) et remontent la pipeline avec
 chaque promotion depuis. Regardez-les avant de compter dessus.
 
-Ouvrez le panneau **DevOps Pipeline**, le menu engrenage, **Pipeline Settings**, portée **Global
+Ouvrez le panneau **DevOps Pipeline**, le menu engrenage, **Configure Pipeline Settings**, portée **Global
 Settings**, puis l'onglet **Danger Zone**.
 
 ![La Danger Zone des Global Pipeline Settings, avec les deux réglages des promotion branches](../../_assets/annotated/vscode/pipeline-config-danger--promotion-branches.png)
@@ -536,9 +536,8 @@ sfdx-hardis : sa première ligne est celle d'une promotion ordinaire,
 > declared in its description.
 
 suivie de ce que le job a rassemblé depuis elles. La section repliée **🎫** à côté liste les trois
-Pull Requests, celles de US-057, US-059 et US-061. Sur le fork du cours ce sont les #62, #63 et
-
-# 65 ; les vôtres portent d'autres numéros
+Pull Requests, celles de US-057, US-059 et US-061. Sur le fork du cours ce sont les Pull Requests 62, 63 et 65 ;
+les vôtres portent d'autres numéros.
 
 Si cette ligne manque, ou si elle dit qu'aucune des Pull Requests déclarées n'a pu être utilisée,
 **arrêtez-vous et corrigez avant de merger**. Cela veut dire que le job n'a pas lu la déclaration, et
@@ -647,8 +646,10 @@ Merge**. `integration` est là où vit US-058 et d'où elle sera validée, donc 
 d'autre n'entre en conflit, parce que les trois stories promues sont le même contenu des deux
 côtés.
 
-Les deux fichiers atterrissent sous **Staged Changes** avec le message `Merge remote-tracking branch
-'origin/preprod'` déjà écrit. **Commit**, puis **Save / Publish User Story** comme au [Lab 3.7](3-7-hotfix-and-retrofit.md)
+Les deux fichiers atterrissent sous **Staged Changes** avec le message
+`Merge remote-tracking branch 'origin/preprod' into retrofit/US-059-retrofit` déjà écrit, et le
+bouton bleu en dessous affiche **Continue** tant qu'un merge est en cours, comme au
+[Lab 2.7](../level-2-contributor-advanced/2-7-resolve-a-git-merge-conflict.md). Cliquez dessus, puis **Save / Publish User Story** comme au [Lab 3.7](3-7-hotfix-and-retrofit.md)
 étape 9, et ouvrez la Pull Request vers `integration`, intitulée `Retrofit: the promotion of US-057,
 US-059 and US-061 back down into integration`. Son onglet **Files changed** est vide, et c'est
 normal : lisez le bloc ci-dessous. Attendez son contrôle, et mergez-la avec **Merge pull request**,
