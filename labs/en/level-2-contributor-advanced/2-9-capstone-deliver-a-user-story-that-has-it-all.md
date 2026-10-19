@@ -20,7 +20,7 @@ depends_on:
 
 **Level**: 2 Contributor advanced
 
-**Time**: ~1 h 40<!-- observed --> (observed: median 1 h 44, 3 learners, fastest 1 h 16)<!-- /observed -->
+**Time**: ~40 min<!-- observed --> (observed: median 41 min, 6 learners, fastest 11 min)<!-- /observed -->
 
 **You will**: deliver one story that contains a dependency to check, a data deployment action and a
 teammate working on the same permission set, with no step-by-step.
@@ -51,30 +51,42 @@ handle all three.
 ### The story
 
 1. **Take it.** Name `US-041-handover-checklist`, org `helios-dev`
-2. **Build the object**: `Handover_Item__c`, with `External_Id__c` (Text 40, external id, unique),
-   `Installation__c` (lookup), `Label__c`, `Sequence__c`, `Is_Done__c`, `Is_Template__c`
-3. **Build the reference data**: 10 template `Handover_Item__c` records with no installation, the
+2. **Build the object**: `Handover_Item__c`, its **Record Name** an Auto Number `Handover Item
+   Number`, `HI-{00000}`, **Starting Number** `0`, as [Lab 2.4](2-4-ship-reference-data-and-a-batch-with-deployment-actions.md) did for Crew Capacity, with `External_Id__c` (Text 40, external
+   id, unique), `Installation__c` (Lookup to Installation), `Label__c` (Text 255), `Sequence__c`
+   (Number 3, 0), `Is_Done__c` and `Is_Template__c` (Checkbox, unchecked). When you create it, tick **Launch New Custom Tab Wizard after saving this custom object**, pick any tab
+   style and keep the other defaults of the wizard: the tab is how you reach the records in step 4
+3. **Grant the new object and its fields**, before you create any record: on the `Helios Delivery
+   Manager` permission set, never on a Profile, the way [Lab 2.6](2-6-permission-sets-and-profiles.md) had you do: **Read**, **Create** and **Edit** on Handover Item, and
+   **Read** and **Edit** on its fields. You hold that permission set in `helios-dev`, so this is the
+   access the records and the flow of the next two steps need. The pipeline's user holds it too, and
+   the data load of the second trap needs it, as in [Lab 2.4](2-4-ship-reference-data-and-a-batch-with-deployment-actions.md)
+4. **Build the reference data**: 10 template `Handover_Item__c` records with no installation, the
    checklist every job starts from. **You create these by hand, in `helios-dev`**, like any record:
-   open the org from **Orgs Manager**, then replace everything after `salesforce.com` in the
-   address bar with `/lightning/o/Handover_Item__c/list` (the object has no tab, and this page
-   works without one). Click **New** ten times. For each record, give an **External Id**
+   open the org from **Orgs Manager**, search **Handover Items** in the App Launcher, and click
+   **New** ten times. For each record, give an **External Id**
    (`HANDOVER-TPL-01` to `HANDOVER-TPL-10`), a **Label** (`Panels fixed and torqued`,
    `Inverter commissioned`, `Isolator labelled`...), a **Sequence** (10, 20, 30...), tick
    **Is Template**, and leave **Installation** empty
-4. **Update the close check**: the flow `Installation Close Check` already refuses to close an
+5. **Update the close check**: the flow `Installation Close Check` already refuses to close an
    installation with no install date. Save a new version of it that also refuses while any related
    handover item is not done: after its date decision, a **Get Records** of one `Handover Item` of
    this installation with `Is Done` false, a decision on whether one was found, and a **Custom
    Error**. Describe every element you add, and give the Get Records a fault path, the way [Lab 2.2](2-2-fix-a-missing-dependency-deployment-error.md)
    had you do
-5. **Grant the new object and its fields** on the `Helios Delivery Manager` permission set, never
-   on a Profile, the way [Lab 2.6](2-6-permission-sets-and-profiles.md) had you do: **Read**, **Create** and **Edit** on Handover Item, and
-   **Read** and **Edit** on its fields. The pipeline's user holds that permission set too, and the
-   data load of the second trap needs it, as in [Lab 2.4](2-4-ship-reference-data-and-a-batch-with-deployment-actions.md)
 6. **Retrieve it**: **Commit changes**, **Recent Changes**, and take what you made and nothing
-   else. Commit it
-7. **Publish, Pull Request, green, merge**, in the order the three things below ask for: the
-   teammate comes before your Pull Request, the data action after it
+   else, the tab included. The tab wizard also touched Profiles and apps: leave those rows. Commit it
+7. **Count before you push**: what you created, then the same again in `force-app/` (**One**, below)
+8. **Merge the teammate first**: simulate US-019, merge it, bring `integration` into your branch,
+   and check the permission set holds both grants (**Three**, below)
+9. **Build the data workspace** for the ten records, as in [Lab 2.4](2-4-ship-reference-data-and-a-batch-with-deployment-actions.md), and commit it (**Two**, below)
+10. **Publish and open the Pull Request** into `integration`, and read the **Git Delta
+    package.xml** report: every component you counted in step 7 is in it
+11. **Declare the data action** on the Pull Request, then commit the file the editor wrote and
+    publish again (**And the data action**, below)
+12. **Green, then merge** with **Squash and merge**
+
+The sections below say why each of these steps sits where it does.
 
 ### The three things waiting for you
 

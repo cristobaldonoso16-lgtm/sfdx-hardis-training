@@ -8,6 +8,7 @@ lang: en
 source_rev: ""
 screenshots:
   - annotated/vscode/pipeline-cards--new-user-story
+  - annotated/vscode/pipeline-packages-menu--package-xml
   - annotated/vscode/pipeline-config
 depends_on:
   commands: [hardis:mdapi:read, hardis:work:save]
@@ -21,7 +22,7 @@ depends_on:
 
 **Level**: 2 Contributor advanced
 
-**Time**: ~30 min<!-- observed --> (observed: median 34 min, 6 learners, fastest 21 min)<!-- /observed -->
+**Time**: ~20 min<!-- observed --> (observed: median 20 min, 6 learners, fastest 10 min)<!-- /observed -->
 
 **You will**: chase a permission that vanishes between a green deployment and the target org, and
 find out it was removed on purpose.
@@ -54,7 +55,12 @@ panel. Name `US-033-batch-cost-visibility`, org `helios-dev`.
 
 The crews log in with the **Helios Crew** profile. It is one of the two Profiles this repository
 carries, next to `Admin`, the System Administrator profile: in the **DevOps Pipeline** panel, open
-the **Deployment packages** menu, then **Package XML**, and the **Profile** row lists both.
+the **Deployment packages** menu **(1)**, the icon of a box with an arrow in the header, which shows
+its name only when you hover it, then **Package XML** **(2)**, as in
+[Lab 1.5](../level-1-contributor-basics/1-5-retrieve-commit-and-publish-your-changes.md). The
+**Profile** row lists both.
+
+![The Deployment packages menu of the DevOps Pipeline panel, with Package XML](../../_assets/annotated/vscode/pipeline-packages-menu--package-xml.png)
 
 In `helios-dev`, the quick way: **Setup > Object Manager > Panel Batch > Fields & Relationships >
 Cost > Set Field-Level Security**, tick **Visible** for the **Helios Crew** profile, **Save**.
@@ -155,7 +161,7 @@ permission set, whatever their Profile.
 
 ### 6. Look at the other protection while you are here
 
-Open the **DevOps Pipeline** panel, then **Pipeline Settings** in the gear menu. Leave the scope
+Open the **DevOps Pipeline** panel, then **Configure Pipeline Settings** in the gear menu. Leave the scope
 selector **(1)** on **Global Settings**: these are project rules, identical for every branch.
 
 ![The Global Pipeline Settings panel, on its Deployment tab](../../_assets/annotated/vscode/pipeline-config.png)
@@ -257,8 +263,10 @@ message names it, as `Object-Layout name`: start there.
    the org you build in, and retrieve the Profile again. A language: set your user to English in
    the target org, **your picture > Settings > Language & Time Zone**, and rename the layout
    there. Anything else, on an object your project does not use: the line has no business in the
-   repository. In a **Fix** User Story, open the Profile file, delete the `<layoutAssignments>`
-   block that names the layout, or the `<tabVisibilities>` block that names the tab, and publish
+   repository. Open the Profile file, delete the `<layoutAssignments>` block that names the
+   layout, or the `<tabVisibilities>` block that names the tab, commit, and **Save / Publish**:
+   on the branch of this lab when it is its own Pull Request that went red, in a **Fix** User
+   Story when the Profile is already merged
 
 Salesforce reports one missing name per deployment, so a second one can hide behind the first.
 

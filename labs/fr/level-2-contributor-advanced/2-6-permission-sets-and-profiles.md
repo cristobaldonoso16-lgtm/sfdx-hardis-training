@@ -5,9 +5,10 @@ description: "Une permission accordée sur un profil s'évapore après un déplo
 level: 2
 lab: 6
 lang: fr
-source_rev: "124acb5d76418568e17fdff77e55a92c8703e1bb"
+source_rev: "0af2cd60817d219928bbe7e9bc5860dd8d29e385"
 screenshots:
   - annotated/vscode/pipeline-cards--new-user-story
+  - annotated/vscode/pipeline-packages-menu--package-xml
   - annotated/vscode/pipeline-config
 depends_on:
   commands: [hardis:mdapi:read, hardis:work:save]
@@ -21,7 +22,7 @@ depends_on:
 
 **Niveau** : 2 Contributeur avancé
 
-**Durée** : ~30 min<!-- observed --> (observé : médiane 34 min, 6 participants, le plus rapide 21 min)<!-- /observed -->
+**Durée** : ~20 min<!-- observed --> (observé : médiane 20 min, 6 participants, le plus rapide 10 min)<!-- /observed -->
 
 **Vous allez** : courir après une permission qui s'évapore entre un déploiement vert et l'org cible,
 et découvrir qu'elle a été retirée exprès.
@@ -55,8 +56,12 @@ Pipeline. Nom `US-033-batch-cost-visibility`, org `helios-dev`.
 
 Les équipes de pose se connectent avec le profil **Helios Crew**. C'est l'un des deux profils que
 porte ce repository, à côté d'`Admin`, le profil System Administrator : dans le panneau **DevOps
-Pipeline**, ouvrez le menu **Deployment packages**, puis **Package XML**, et la ligne **Profile**
-liste les deux.
+Pipeline**, ouvrez le menu **Deployment packages** **(1)**, l'icône d'une boîte avec une flèche dans
+l'en-tête, qui n'affiche son nom qu'au survol, puis **Package XML** **(2)**, comme au
+[Lab 1.5](../level-1-contributor-basics/1-5-retrieve-commit-and-publish-your-changes.md). La ligne
+**Profile** liste les deux.
+
+![Le menu Deployment packages du panneau DevOps Pipeline, avec Package XML](../../_assets/annotated/vscode/pipeline-packages-menu--package-xml.png)
 
 Dans `helios-dev`, la voie rapide : **Setup > Object Manager > Panel Batch > Fields & Relationships >
 Cost > Set Field-Level Security**, cochez **Visible** pour le profil **Helios Crew**, **Save**.
@@ -165,7 +170,7 @@ de pose porte ce permission set, quel que soit son profil.
 
 ### 6. Regarder l'autre protection, tant que vous y êtes
 
-Ouvrez le panneau **DevOps Pipeline**, puis **Pipeline Settings** dans le menu engrenage. Laissez le
+Ouvrez le panneau **DevOps Pipeline**, puis **Configure Pipeline Settings** dans le menu engrenage. Laissez le
 sélecteur de portée **(1)** sur **Global Settings** : ce sont des règles de projet, identiques pour
 chaque branche.
 
@@ -272,9 +277,11 @@ cible n'a pas. Le message la nomme, sous la forme `Objet-Nom de la présentation
    manager, ou en la désactivant dans l'org où vous construisez, puis récupérez le profil de
    nouveau. Une langue : passez votre utilisateur en anglais dans l'org cible, **votre photo >
    Settings > Language & Time Zone**, et renommez-y la présentation. Tout le reste, sur un objet
-   que votre projet n'utilise pas : la ligne n'a rien à faire dans le repository. Dans une User
-   Story **Fix**, ouvrez le fichier du profil, supprimez le bloc `<layoutAssignments>` qui nomme
-   la présentation, ou le bloc `<tabVisibilities>` qui nomme l'onglet, et publiez
+   que votre projet n'utilise pas : la ligne n'a rien à faire dans le repository. Ouvrez le
+   fichier du profil, supprimez le bloc `<layoutAssignments>` qui nomme la présentation, ou le
+   bloc `<tabVisibilities>` qui nomme l'onglet, commitez, et faites **Save / Publish** : sur la
+   branche de ce lab quand c'est sa propre Pull Request qui est rouge, dans une User Story **Fix**
+   quand le profil est déjà mergé
 
 Salesforce signale un seul nom manquant par déploiement : un deuxième peut se cacher derrière le
 premier.
