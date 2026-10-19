@@ -5,11 +5,12 @@ description: "Lisez un log de déploiement sfdx-hardis, trouvez ce qu'un joker .
 level: 3
 lab: 3
 lang: fr
-source_rev: "46181112ca0f8c4fc2f70e1e0be02dbb5a59c7b3"
+source_rev: "dedbee6351e8a899ded3a97d8417e23e2b64f67d"
 screenshots:
   - annotated/vscode/pipeline-config-deployment--delta
   - annotated/vscode/orgs-manager
   - annotated/vscode/devops-pipeline--deployment-status
+  - annotated/vscode/pipeline-packages-menu--package-xml
   - annotated/web/github-pr-deployment-actions-failed
   - annotated/vscode/pipeline-branch-modal-actions-failed
   - annotated/vscode/action-run-prompts
@@ -27,7 +28,7 @@ depends_on:
 
 **Niveau** : 3 Release Manager
 
-**Durée** : ~45 min
+**Durée** : ~1 h 35<!-- observed --> (observé : médiane 1 h 37, 5 participants, le plus rapide 38 min)<!-- /observed -->
 
 **Vous allez** : lire correctement un log de déploiement, relire une Pull Request dont le contrôle
 échoue sur un champ qui est pourtant dans son diff et trouver le fichier qui le cache, puis
@@ -85,10 +86,13 @@ pourquoi il ne lance lui-même aucun test.
 
 Vous avez modifié un composant. Lisez maintenant ce que le job a réellement envoyé.
 
-Ouvrez le package : panneau **DevOps Pipeline**, menu **Deployment packages**, **Package XML**. Il
-liste toute l'application Helios, quelques dizaines de composants, et **c'est cela le package** : sur
-ce projet chaque déploiement vers `integration` envoie le tout, quoi qu'ait dit le diff. Le compteur
-de composants envoyés du log le dira.
+Ouvrez le package : panneau **DevOps Pipeline**, le menu **Deployment packages** **(1)**, l'icône
+d'une boîte avec une flèche dans l'en-tête, puis **Package XML** **(2)**. Il liste toute
+l'application Helios, quelques dizaines de composants, et **c'est cela le package** : sur ce projet
+chaque déploiement vers `integration` envoie le tout, quoi qu'ait dit le diff. Le compteur de
+composants envoyés du log le dira.
+
+![Le menu Deployment packages du panneau DevOps Pipeline, avec Package XML](../../_assets/annotated/vscode/pipeline-packages-menu--package-xml.png)
 
 C'est le comportement par défaut, et il vaut la peine de le ressentir une fois avant d'apprendre ce
 qui le corrige.
@@ -103,7 +107,7 @@ l'org doit vraiment être au commit où la pipeline la croit.
 !!! note "Ce projet a le delta désactivé, exprès"
     `useDeltaDeployment` est absent de `config/.sfdx-hardis.yml` : chaque déploiement de ce cours
     envoie donc le package complet. Lisez-le vous-même : **DevOps Pipeline**, menu engrenage,
-    **Pipeline Settings**, portée **Global Settings** **(1)**, onglet **Deployment** **(2)**.
+    **Configure Pipeline Settings**, portée **Global Settings** **(1)**, onglet **Deployment** **(2)**.
     **Use Delta Deployment** **(3)** affiche **Disabled**.
 
     L'application Helios fait maintenant une soixantaine de composants : un déploiement complet coûte une
@@ -545,4 +549,4 @@ Welcome page > **Training: Level 3** > **Check my work**, puis choisissez le **L
 - [Les rouages de Smart Deploy](https://sfdx-hardis.cloudity.com/salesforce-devops-smart-deployment/)
 - [Rattraper une action de déploiement en échec](https://sfdx-hardis.cloudity.com/salesforce-devops-work-on-user-story-deployment-actions/#recover-a-failed-action)
 
-[Suite : Lab 3.4 - Trois Pull Requests se percutent : choisir l'ordre de merge](3-4-merge-colliding-pull-requests.md){ .md-button .md-button--primary }
+[Suite : Lab 3.4 - Trois Pull Requests pour une release : revoir l'ordre de merge](3-4-merge-colliding-pull-requests.md){ .md-button .md-button--primary }

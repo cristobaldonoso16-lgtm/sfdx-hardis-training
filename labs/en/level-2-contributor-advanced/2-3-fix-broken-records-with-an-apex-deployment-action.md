@@ -24,7 +24,7 @@ depends_on:
 
 **Level**: 2 Contributor advanced
 
-**Time**: ~45 min<!-- observed --> (observed: median 48 min, 12 learners, fastest 16 min)<!-- /observed -->
+**Time**: ~30 min<!-- observed --> (observed: median 34 min, 6 learners, fastest 15 min)<!-- /observed -->
 
 **You will**: hit a failure that no amount of metadata fixing solves, and learn the tool that exists
 for it: a deployment action.
@@ -64,10 +64,11 @@ panel. Name `US-024-crew-size-required`, org `helios-dev`.
 ![The New User Story card of the DevOps Pipeline panel](../../_assets/annotated/vscode/pipeline-cards--new-user-story.png)
 
 In `helios-dev`: **Setup > Object Manager > Installation > Fields & Relationships > Crew Size >
-Edit**, tick **Required**, **Save**.
+Edit**, tick **Required**.
 
-Salesforce warns you about API and Apex callers, asks you to **Confirm**, and saves it. Not a word
-about your data, although most installations in your org have no crew size.
+The moment the box is ticked, Salesforce warns you about API and Apex callers and asks you to
+**Confirm**. Confirm, then **Save**. Not a word about your data, although most installations in
+your org have no crew size.
 Remember that: it is the whole of this lab.
 
 Bring the field down with **Commit changes** (the field, nothing else), commit it, **Save /
@@ -102,11 +103,17 @@ sfdx-hardis comment even said so, in the tip folded under each error, with a lin
 
 The check passes. **Do not merge yet.**
 
-Open `helios-dev`, find an installation with no crew size, change anything at all on it, and save.
+Open `helios-dev`, find an installation with no crew size, change anything at all on it, and
+save. The record refuses:
 
 ```
-Required fields are missing: [Crew_Size__c]
+We hit a snag.
+Review the following fields
+  • Crew Size
 ```
+
+The same refusal reads `Required fields are missing: [Crew_Size__c]` when it comes from Apex or
+the API, which is how a script meets it.
 
 **Salesforce enforces a required field on save, not on the data that is already there.** It was
 perfectly happy to make the field required while most installations had it empty, and the green
@@ -146,6 +153,10 @@ into `force-app/main/default/classes/`, in the Explorer, with copy and paste:
   default crew of two to every installation that has none
 - `CrewSizeBackfillBatchTest.cls` and `CrewSizeBackfillBatchTest.cls-meta.xml`: its test. Salesforce
   deploys no Apex without one, and [Lab 2.5](2-5-pass-code-quality-and-apex-test-coverage.md) is about that gate
+
+Those four and no others, and copied, not moved. The folder also holds `CrewCapacityBatch` and its
+test, which are for [Lab 2.4](2-4-ship-reference-data-and-a-batch-with-deployment-actions.md): they need an object this story does not bring, the check of your Pull
+Request fails on them, and [Lab 2.4](2-4-ship-reference-data-and-a-batch-with-deployment-actions.md) copies them from this folder.
 
 Then the script the action runs: create the file `scripts/apex/backfill-crew-size.apex` and copy
 this into it.
@@ -318,6 +329,13 @@ repository, it cannot see it. Close it and reopen it with the right base.
 **The Apex script fails with `Invalid type: CrewSizeBackfillBatch`.**
 The class is not in the org the script ran in. Either the action runs **before** the deployment,
 when the class does not exist yet, or the class files were not committed with the story.
+
+**The check fails with `ApexClass CrewCapacityBatch: Invalid type: Crew_Capacity__c`.**
+The [Lab 2.4](2-4-ship-reference-data-and-a-batch-with-deployment-actions.md) batch went into `force-app/main/default/classes/` with the one of this lab, and
+`manifest/package.xml` lists `CrewCapacityBatch` and `CrewCapacityBatchTest`. Delete their four files
+from `force-app/main/default/classes/`, keep a copy in `scripts/apex/samples/` (put it back there if
+you moved it), remove their two `<members>` lines from `manifest/package.xml`, commit, and push:
+the check runs again.
 
 **The deployment still fails on the permission sets.**
 They still carry `fieldPermissions` for `Installation__c.Crew_Size__c`. A required field cannot have

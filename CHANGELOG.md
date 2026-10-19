@@ -3,8 +3,53 @@
 What changed in the course, for learners and trainers. The course has no versions: each section is
 a day, newest first, and a change goes under the date of the day it is made.
 
+## 2026-10-19
+
+- Links to another site (GitHub, Salesforce, the sfdx-hardis documentation) open in a new tab, so the lab stays open.
+- Lab 2.3 says to copy only its four Apex files, and explains the check that fails on the Lab 2.4 batch when it is copied too.
+- Lab 3.8 says what to do when GitHub refuses a push during the configuration: never merge the monitoring branch into `main`, and store the two new secrets of each run.
+
+- Lab 3.1 shows what the scratch org pool, org initialization and replacement rules are for, with a picture of each and its documentation page, without asking you to set them up.
+
+## 2026-10-18
+
+- Labs 3.1 and 3.6 follow the new gear menu of the DevOps Pipeline: Configure Pipeline Settings, Add or Reconnect a Major Org, Configure Org Initialization, Configure Replacement Rules and Generate DORA Metrics, with their screenshots taken again.
+- Set up my training environment says what it waits for while it turns Dev Hub on, and stops with a clear message when the org does not answer.
+
+## 2026-10-17
+
+- Lab 3.4 says plainly that US-018 and US-019 are already merged when it starts, and reviews their merge order instead of promising a live collision.
+- Lab 3.6 explains the conflict in `config/.sfdx-hardis.yml` on the first Pull Request into `preprod` when a course update was squashed, and Lab 3.1 warns about it.
+- Update my course reminds you to merge its Pull Request with a merge commit whenever it hands it over to you.
+- Contributors: Claude Code loads the MegaLinter skills and agents from the MegaLinter plugin, enabled in `.claude/settings.json`.
+
+## 2026-10-16
+
+- Lab 1.7 names the data type as the field wizard lists it, Text Area (Long).
+- Lab 2.1 says to close the question that offers to merge `integration` into the finished Level 1 branch after Back.
+- Lab 2.3 says that Salesforce asks to confirm as soon as Required is ticked, and that a record page shows "We hit a snag".
+- Lab 2.4 and Lab 2.9 give the Record Name settings and the type of every field of their new objects.
+- Lab 2.5 explains why the Apex Tests card of `helios-dev` and the check of the Pull Request can read a different coverage.
+- Lab 2.6 says where to remove a layout the target org lacks when the lab's own Pull Request goes red.
+- Lab 2.9 grants the new object and its fields before you create its records and edit the flow (feedback from a learner).
+- Lab 3.5: **Publish my pipeline configuration** works when your local `integration` is behind GitHub, and names the file when your change collides with one merged there (feedback from a learner).
+- The help page says to switch GitHub Actions back on before resetting a level (feedback from a learner).
+- Lab 2.7 and Lab 3.10 give the whole merge message and the Continue button that ends a merge.
+- Lab 3.1 names what the External Client App page shows, and commits the configuration as US-050 so the promotion of Lab 3.5 finds its ticket.
+- Lab 3.10 no longer shows a stray heading in step 6, which the linter reported on every learner's first Pull Request.
+
+## 2026-10-15
+
+- Lab 2.8 makes the mess with twenty recent rows and the Admin Profile instead of every row, so the retrieve is short and skips the Agentforce rows (feedback from a learner).
+- Lab 2.9 creates a tab with the Handover Item object, and lists its steps in the order they run, from the count to the merge (feedback from a learner).
+- Lab 3.1 explains a Pull Request stuck on "Expected - Waiting for status to be reported" with no check running (feedback from a learner).
+- The Statistics page and the times of the labs are recalculated after every badge awarded, not only on Mondays.
+
 ## 2026-10-14
 
+- Lab 1.4 says that in Agentforce Vibes the org opens in a new browser tab, and what to do while the extension that opened nothing there is being updated (issue #163).
+- Lab 2.8 says to untick the Agentforce rows before the select-all retrieve, not after it fails, and that this retrieve is long by design (feedback from a learner).
+- Lab 2.6 and Lab 3.3 show the Deployment packages menu of the DevOps Pipeline panel, an icon whose name only appears on hover, with the picture Lab 1.5 already had (feedback from a learner).
 - Lab 3.3 quotes the deployment comment of a failed action with its new verdict, "⚠️ Deployed to integration, but an action failed after the deployment".
 - The three capstones and every badge page show the Cloudity services banner, as the home page and the Help page do.
 - Levels 2 and 3 no longer show the amber "This level is in QA" banner: the three levels are released.
