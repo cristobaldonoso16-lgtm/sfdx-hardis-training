@@ -29,7 +29,7 @@ depends_on:
 
 **Level**: 3 Release Manager
 
-**Time**: ~55 min
+**Time**: ~1 h 15<!-- observed --> (observed: median 1 h 16, 5 learners, fastest 46 min)<!-- /observed -->
 
 **You will**: ship three approved User Stories to preprod while two others stay behind in UAT, solve
 the conflict that one of them drags along, and put the pipeline back afterwards, using the one
@@ -90,7 +90,7 @@ included.
 The two settings this lab needs were published in [Lab 3.1](3-1-configure-the-pipeline-up-to-production.md) and have been travelling up the
 pipeline with every promotion since. Look at them before you rely on them.
 
-Open the **DevOps Pipeline** panel, the gear menu, **Pipeline Settings**, scope **Global Settings**,
+Open the **DevOps Pipeline** panel, the gear menu, **Configure Pipeline Settings**, scope **Global Settings**,
 and the **Danger Zone** tab.
 
 ![The Danger Zone of the Global Pipeline Settings, with the two promotion branch settings](../../_assets/annotated/vscode/pipeline-config-danger--promotion-branches.png)
@@ -513,9 +513,8 @@ comment: its first line is the one from an ordinary promotion,
 > declared in its description.
 
 followed by what the job collected from them. The folded **🎫** section next to it lists the three
-Pull Requests, those of US-057, US-059 and US-061. On the course's own fork they are #62, #63 and
-
-# 65; yours carry other numbers
+Pull Requests, those of US-057, US-059 and US-061. On the course's own fork they are Pull Requests 62, 63 and 65;
+yours carry other numbers.
 
 If that line is missing, or says none of the declared Pull Requests could be used, **stop and fix it
 before merging**. It means the job did not read the declaration, and the deployment about to run is
@@ -618,8 +617,10 @@ Current** on the block, in both files, then **Complete Merge**. `integration` is
 and where it will be approved from, so its lines stay. Nothing else conflicts, because the three
 promoted stories are the same content on both sides.
 
-Both files land under **Staged Changes** with the message `Merge remote-tracking branch
-'origin/preprod'` already written. **Commit**, then **Save / Publish User Story** as in [Lab 3.7](3-7-hotfix-and-retrofit.md)
+Both files land under **Staged Changes** with the message
+`Merge remote-tracking branch 'origin/preprod' into retrofit/US-059-retrofit` already written, and
+the blue button under it reads **Continue** while a merge is in progress, as in
+[Lab 2.7](../level-2-contributor-advanced/2-7-resolve-a-git-merge-conflict.md). Click it, then **Save / Publish User Story** as in [Lab 3.7](3-7-hotfix-and-retrofit.md)
 step 9, and open the Pull Request into `integration`, titled `Retrofit: the promotion of US-057,
 US-059 and US-061 back down into integration`. Its **Files changed** tab is empty, and that is
 right: read the block below. Wait for its check, and merge it with **Merge pull request**, as the
